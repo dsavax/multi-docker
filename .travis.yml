@@ -1,6 +1,4 @@
 sudo: required
-git:
-  submodules: true
 
 services:
   - docker
