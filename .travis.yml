@@ -1,0 +1,25 @@
+sudo: required
+git:
+  submodules: true
+
+services:
+  - docker
+
+before_install:
+  - docker build -t dsavax/react-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run dsavax/react-test npm test -- --coverage
+
+after_success:
+  - docker build -t dsavax/multi-client ./client
+  - docker build -t dsavax/multi-nginx ./nginx
+  - docker build -t dsavax/multi-server ./server
+  - docker build -t dsavax/multi-worker ./worker
+# Log in to the docker CLI
+  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+#Push imagest to the Docker Hub.
+  - docker push dsavax/multi-client
+  - docker push dsavax/multi-nginx
+  - docker push dsavax/multi-server
+  - docker push dsavax/multi-worker
