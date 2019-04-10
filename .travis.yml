@@ -11,7 +11,7 @@ after_success:
   - docker build -t dsavax/multi-server ./server
   - docker build -t dsavax/multi-worker ./worker
 # Log in to the docker CLI
-  - echo "$DOCKER_PASSWORD" | docker login -u "DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
 #Push imagest to the Docker Hub.
   - docker push dsavax/multi-client
   - docker push dsavax/multi-nginx
