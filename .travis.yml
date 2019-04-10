@@ -12,7 +12,7 @@ after_success:
   - docker build -t dsavax/multi-worker ./worker
 # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-#Push imagest to the Docker Hub.
+#Push images to the Docker Hub.
   - docker push dsavax/multi-client
   - docker push dsavax/multi-nginx
   - docker push dsavax/multi-server
@@ -25,8 +25,8 @@ deploy:
   env: MultiDocker-env
   bucket_name: elasticbeanstalk-eu-central-1-222040459125
   bucket_path: docker-multi
-  on: 
+  on:
     branch: master
- access_key_id: $AWS_ACCESS_KEY
- secret_access_key:
-  secure: $AWS_SECRET_KEY
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secure: $AWS_SECRET_KEY
