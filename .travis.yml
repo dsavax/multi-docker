@@ -17,3 +17,16 @@ after_success:
   - docker push dsavax/multi-nginx
   - docker push dsavax/multi-server
   - docker push dsavax/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: eu-central-1
+  app: multi-docker
+  env: MultiDocker-env
+  bucket_name: elasticbeanstalk-eu-central-1-222040459125
+  bucket_path: docker-multi
+  on: 
+    branch: master
+ access_key_id: $AWS_ACCESS_KEY
+ secret_access_key:
+  secure: $AWS_SECRET_KEY
